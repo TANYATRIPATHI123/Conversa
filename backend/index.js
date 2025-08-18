@@ -27,9 +27,9 @@ app.get("*",(req,res)=>{
 })
 
 const PORT = process.env.PORT || 3000;
+dbConnect();
 
 server.listen(PORT,()=>{
-    dbConnect();
     console.log(`Working at ${PORT}`);
 })
 
