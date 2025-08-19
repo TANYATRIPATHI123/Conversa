@@ -13,13 +13,20 @@ const __dirname = path.resolve();
 
 dotenv.config();
 
+
+// Put this BEFORE routes
+const allowedOrigins = [
+  "http://localhost:5173",             // dev
+  "https://conversa-sand.vercel.app"   // deployed frontend on Vercel
+];
+
 app.use(cors({
-    origin: ["https://conversa-sand.vercel.app"], // replace with your actual Vercel URL
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true
+  origin: allowedOrigins,
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  credentials: true
 }));
 
-app.options("*", cors());
+app.options("*", cors());  // preflight
 
 
 app.use(express.json());

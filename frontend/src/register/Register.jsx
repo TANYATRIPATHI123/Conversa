@@ -36,7 +36,8 @@ const handelSubmit = async (e) => {
   try {
     const register = await axios.post(
       `${API_BASE_URL}/api/auth/register`,
-      inputData
+      inputData, 
+      { withCredentials: true }
     );
     const data = register.data;
 
