@@ -22,32 +22,42 @@ console.log(inputData);
         }))
     }
 
-    const handelSubmit=async(e)=>{
-        e.preventDefault();
-        setLoading(true)
-        if(inputData.password !== inputData.confpassword.toLowerCase()){
-            setLoading(false)
-            return toast.error("Password Dosen't match")
-        }
-        try {
-            const register = await axios.post(`/api/auth/register`,inputData);
-            const data = register.data;
-            if(data.success === false){
-                setLoading(false)
-                toast.error(data.message)
-                console.log(data.message);
-            }
-            toast.success(data?.message)
-            localStorage.setItem('chatapp',JSON.stringify(data))
-            setAuthUser(data)
-            setLoading(false)
-            navigate('/login')
-        } catch (error) {
-            setLoading(false)
-            console.log(error);
-            toast.error(error?.response?.data?.message)
-        }
+    const API_BASE_URL = import.meta.env.VITE_API_URL;
+
+const handelSubmit = async (e) => {
+  e.preventDefault();
+  setLoading(true);
+
+  if (inputData.password !== inputData.confpassword.toLowerCase()) {
+    setLoading(false);
+    return toast.error("Password doesn't match");
+  }
+
+  try {
+    const register = await axios.post(
+      `${API_BASE_URL}/api/auth/register`,
+      inputData
+    );
+    const data = register.data;
+
+    if (data.success === false) {
+      setLoading(false);
+      toast.error(data.message);
+      console.log(data.message);
     }
+
+    toast.success(data?.message);
+    localStorage.setItem("chatapp", JSON.stringify(data));
+    setAuthUser(data);
+    setLoading(false);
+    navigate("/login");
+  } catch (error) {
+    setLoading(false);
+    console.log(error);
+    toast.error(error?.response?.data?.message);
+  }
+};
+
 
   return (
     <div className='flex flex-col items-center justify-center mix-w-full mx-auto'>
