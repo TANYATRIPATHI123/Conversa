@@ -13,14 +13,12 @@ const __dirname = path.resolve();
 
 dotenv.config();
 
-// ✅ Enable CORS
 app.use(cors({
-    origin: [
-        "http://localhost:5173",        // local frontend
-        "https://conversa-sand.vercel.app" // replace with your actual Vercel URL
-    ],
-    credentials: true,  // allow cookies / auth headers
-}))
+    origin: ["https://conversa-sand.vercel.app"], // replace with your actual Vercel URL
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true
+}));
+
 
 app.use(express.json());
 app.use(cookieParser())
