@@ -15,18 +15,33 @@ dotenv.config();
 
 
 // Put this BEFORE routes
+import cors from "cors";
+
 const allowedOrigins = [
-  "http://localhost:5173",             // dev
-  "https://conversa-sand.vercel.app"   // deployed frontend on Vercel
+  "http://localhost:5173",              // local dev
+  "https://conversa-sand.vercel.app"    // your deployed frontend
 ];
 
 app.use(cors({
-  origin: allowedOrigins,
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   credentials: true
 }));
 
-app.options("*", cors());  // preflight
+app.options("*", cors()); // handle preflight
+
+
+app.use((req, res, next) => {
+  console.log("Incoming request from:", req.headers.origin);
+  next();
+});
+
 
 
 app.use(express.json());
