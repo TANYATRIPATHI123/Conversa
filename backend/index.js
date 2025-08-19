@@ -17,7 +17,7 @@ dotenv.config();
 app.use(cors({
     origin: [
         "http://localhost:5173",        // local frontend
-        "https://conversa-sand.vercel.app/login" // replace with your actual Vercel URL
+        "https://conversa-sand.vercel.app" // replace with your actual Vercel URL
     ],
     credentials: true,  // allow cookies / auth headers
 }))
