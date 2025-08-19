@@ -31,11 +31,11 @@ app.use('/api/message', messageRouter)
 app.use('/api/user', userRouter)
 
 // ✅ Serve frontend (if needed when backend also serves build)
-app.use(express.static(path.join(__dirname, "/frontend/dist")))
+// app.use(express.static(path.join(__dirname, "/frontend/dist")))
 
-app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"))
-})
+// app.get("*", (req, res) => {
+//     res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"))
+// })
 
 const PORT = process.env.PORT || 3000;
 dbConnect();
