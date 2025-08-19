@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+
 const Login = () => {
 
     const navigate = useNavigate();
@@ -20,26 +23,29 @@ const Login = () => {
     console.log(userInput);
 
     const handelSubmit = async (e) => {
-        e.preventDefault();
-        setLoading(true)
-        try {
-            const login = await axios.post(`/api/auth/login`, userInput);
-            const data = login.data;
-            if (data.success === false) {
-                setLoading(false)
-                console.log(data.message);
-            }
-            toast.success(data.message)
-            localStorage.setItem('chatapp',JSON.stringify(data));
-            setAuthUser(data)
-            setLoading(false)
-            navigate('/')
-        } catch (error) {
-            setLoading(false)
-            console.log(error);
-            toast.error(error?.response?.data?.message)
+    e.preventDefault();
+    setLoading(true);
+    try {
+        const login = await axios.post(`${API_BASE_URL}/api/auth/login`, userInput);
+        const data = login.data;
+
+        if (data.success === false) {
+            setLoading(false);
+            console.log(data.message);
         }
+
+        toast.success(data.message);
+        localStorage.setItem('chatapp', JSON.stringify(data));
+        setAuthUser(data);
+        setLoading(false);
+        navigate('/');
+    } catch (error) {
+        setLoading(false);
+        console.log(error);
+        toast.error(error?.response?.data?.message);
     }
+};
+
     return (
         <div className='flex flex-col items-center justify-center mix-w-full mx-auto'>
             <div className='w-full p-6 rounded-lg shadow-lg
