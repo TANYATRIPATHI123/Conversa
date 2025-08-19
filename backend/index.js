@@ -12,6 +12,12 @@ const __dirname = path.resolve();
 
 dotenv.config();
 
+import cors from "cors";
+app.use(cors({
+  origin: ["https://conversa-sand.vercel.app/"], // your Vercel domain
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
 
 app.use(express.json());
 app.use(cookieParser())
