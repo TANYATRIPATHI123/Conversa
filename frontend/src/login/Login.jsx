@@ -20,7 +20,7 @@ const Login = () => {
             ...userInput, [e.target.id]: e.target.value
         })
     }
-    console.log(userInput);
+    //console.log(userInput);
 
     const handelSubmit = async (e) => {
     e.preventDefault();
@@ -31,7 +31,7 @@ const Login = () => {
 
         if (data.success === false) {
             setLoading(false);
-            console.log(data.message);
+            //console.log(data.message);
         }
 
         toast.success(data.message);
@@ -41,7 +41,7 @@ const Login = () => {
         navigate('/');
     } catch (error) {
         setLoading(false);
-        console.log(error);
+        //console.log(error);
         toast.error(error?.response?.data?.message);
     }
 };

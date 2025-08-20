@@ -7,6 +7,7 @@ import axios from 'axios';
 import { useSocketContext } from '../../context/SocketContext';
 import notify from '../../assets/sound/notification.mp3';
 
+const API_BASE_URL = import.meta.env.VITE_API_URL;
 // eslint-disable-next-line react/prop-types
 const MessageContainer = ({ onBackUser }) => {
     const { messages, selectedConversation, setMessage } = userConversation();
@@ -37,7 +38,7 @@ const MessageContainer = ({ onBackUser }) => {
         const getMessages = async () => {
             setLoading(true);
             try {
-                const get = await axios.get(`/api/message/${selectedConversation?._id}`);
+                const get = await axios.get(`${API_BASE_URL}/api/message/${selectedConversation?._id}`);
                 const data = await get.data;
                 if (data.success === false) {
                     setLoading(false);
@@ -63,7 +64,7 @@ const MessageContainer = ({ onBackUser }) => {
         e.preventDefault();
         setSending(true);
         try {
-            const res =await axios.post(`/api/message/send/${selectedConversation?._id}`,{messages:sendData});
+            const res =await axios.post(`${API_BASE_URL}/api/message/send/${selectedConversation?._id}`,{messages:sendData});
             const data = await res.data;
             if (data.success === false) {
                 setSending(false);

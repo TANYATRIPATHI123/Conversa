@@ -9,6 +9,7 @@ import { BiLogOut } from "react-icons/bi";
 import userConversation from '../../Zustans/useConversation';
 import { useSocketContext } from '../../context/SocketContext';
 
+const API_BASE_URL = import.meta.env.VITE_API_URL;
 // eslint-disable-next-line react/prop-types
 const Sidebar = ({ onSelectUser }) => {
 
@@ -41,7 +42,7 @@ const Sidebar = ({ onSelectUser }) => {
         const chatUserHandler = async () => {
             setLoading(true)
             try {
-                const chatters = await axios.get(`/api/user/currentchatters`)
+                const chatters = await axios.get(`${API_BASE_URL}/api/user/currentchatters`)
                 const data = chatters.data;
                 if (data.success === false) {
                     setLoading(false)
@@ -63,7 +64,7 @@ const Sidebar = ({ onSelectUser }) => {
         e.preventDefault();
         setLoading(true)
         try {
-            const search = await axios.get(`/api/user/search?search=${searchInput}`);
+            const search = await axios.get(`${API_BASE_URL}/api/user/search?search=${searchInput}`);
             const data = search.data;
             if (data.success === false) {
                 setLoading(false)
@@ -102,7 +103,7 @@ const Sidebar = ({ onSelectUser }) => {
         if (confirmlogout === authUser.username) {
             setLoading(true)
             try {
-                const logout = await axios.post('/api/auth/logout')
+                const logout = await axios.post('${API_BASE_URL}/api/auth/logout')
                 const data = logout.data;
                 if (data?.success === false) {
                     setLoading(false)
