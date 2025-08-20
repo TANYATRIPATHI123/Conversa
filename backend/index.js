@@ -14,9 +14,6 @@ const __dirname = path.resolve();
 dotenv.config();
 
 
-// Put this BEFORE routes
-import cors from "cors";
-
 const allowedOrigins = [
   "http://localhost:5173",              // local dev
   "https://conversa-sand.vercel.app"    // your deployed frontend
