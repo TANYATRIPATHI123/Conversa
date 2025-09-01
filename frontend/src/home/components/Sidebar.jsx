@@ -42,7 +42,7 @@ const Sidebar = ({ onSelectUser }) => {
         const chatUserHandler = async () => {
             setLoading(true)
             try {
-                const chatters = await axios.get(`${API_BASE_URL}/api/user/currentchatters`)
+                const chatters = await axios.get(`${API_BASE_URL}/api/user/currentchatters`);
                 const data = chatters.data;
                 if (data.success === false) {
                     setLoading(false)
@@ -103,7 +103,7 @@ const Sidebar = ({ onSelectUser }) => {
         if (confirmlogout === authUser.username) {
             setLoading(true)
             try {
-                const logout = await axios.post('${API_BASE_URL}/api/auth/logout')
+                const logout = await axios.post(`${API_BASE_URL}/api/auth/logout`)
                 const data = logout.data;
                 if (data?.success === false) {
                     setLoading(false)
